@@ -45,7 +45,8 @@
 
         <div id="authors">
             <div class="author-row">
-                <div class="col-3 text-center"><a href="https://www.linkedin.com/in/naufal-suryanto/">Naufal Suryanto</a><sup>1</sup></div>
+                <div class="col-3 text-center"><a href="https://www.linkedin.com/in/naufal-suryanto/">Naufal
+                        Suryanto</a><sup>1</sup></div>
                 <div class="col-3 text-center"><a href="#">Yongsu Kim</a><sup>1,2</sup></div>
                 <div class="col-3 text-center"><a href="#">Hyoeun Kang</a><sup>1</sup></div>
                 <div class="col-3 text-center"><a href="#">Harashta Tatimma Larasati</a><sup>1</sup></div>
@@ -88,9 +89,12 @@
                     <b>Differentiable Transformation Attack (DTA) </b> is our proposed framework for generating a robust
                     physical adversarial pattern on a target object to camouflage it against object detection models
                     under a wide range of transformations.
-                    Our framework uses legacy photo-realistic renderers for simulating physical-world transformations and employs
-                    our novel <b>Differentiable Transformation Network (DTN)</b> which learns the expected transformation 
-                    of a rendered object when the texture is changed while retaining the target object's original properties.
+                    Our framework uses legacy photo-realistic renderers for simulating physical-world transformations
+                    and employs our novel <b>Differentiable Transformation Network (DTN)</b> to enable the texture
+                    differentiability. Our framework produces a robust adversarial pattern that is applicable and
+                    transferable even in the real-world.
+                    <!-- DTN is trained to learn the expected transformation of a rendered object when the texture is
+                    changed while retaining the target object's original properties. -->
                 </p>
             </figure>
         </section>
@@ -99,31 +103,111 @@
         <h2>Abstract</h2>
         <hr>
         <p>
-           To perform adversarial attacks in the physical world, many studies have proposed adversarial camouflage, a
-           method to hide a target object by applying camouflage patterns on 3D object surfaces.
-           For obtaining optimal physical adversarial camouflage, previous studies have utilized the so-called neural
-           renderer, as it supports differentiability. However, existing neural renderers cannot fully represent various
-           real-world transformations due to a lack of control of scene parameters compared to the legacy
-           photo-realistic renderers.
-           In this paper, we propose the Differentiable Transformation Attack (DTA), a framework for generating a robust
-           physical adversarial pattern on a target object to camouflage it against object detection models with a wide
-           range of transformations.
-           It utilizes our novel Differentiable Transformation Network (DTN), which learns the expected transformation
-           of a rendered object when the texture is changed while preserving the original properties of the target
-           object.
-           Using our attack framework, an adversary can gain both the advantages of the legacy photo-realistic renderers
-           including various physical-world transformations and the benefit of white-box access by offering
-           differentiability.
-           Our experiments show that our camouflaged 3D vehicles can successfully evade state-of-the-art object
-           detection models in the photo-realistic environment (i.e., CARLA on Unreal Engine). Furthermore, our
-           demonstration on a scaled Tesla Model 3 proves the applicability and transferability of our method to the
-           real world.
+            To perform adversarial attacks in the physical world, many studies have proposed adversarial camouflage, a
+            method to hide a target object by applying camouflage patterns on 3D object surfaces.
+            For obtaining optimal physical adversarial camouflage, previous studies have utilized the so-called neural
+            renderer, as it supports differentiability. However, existing neural renderers cannot fully represent
+            various real-world transformations due to a lack of control of scene parameters compared to the legacy
+            photo-realistic renderers. In this paper, we propose the Differentiable Transformation Attack (DTA), a
+            framework for generating a robust physical adversarial pattern on a target object to camouflage it against
+            object detection models with a wide range of transformations. It utilizes our novel Differentiable
+            Transformation Network (DTN), which learns the expected transformation of a rendered object when the texture
+            is changed while preserving the original properties of the target object. Using our attack framework, an
+            adversary can gain both the advantages of the legacy photo-realistic renderers including various
+            physical-world transformations and the benefit of white-box access by offering differentiability. Our
+            experiments show that our camouflaged 3D vehicles can successfully evade state-of-the-art object
+            detection models in the photo-realistic environment (i.e., <a href="https://carla.org/">CARLA</a> on <a
+                href="https://www.unrealengine.com/en-US/">Unreal Engine</a>). Furthermore, our
+            demonstration on a scaled Tesla Model 3 proves the applicability and transferability of our method to the
+            real world.
         </p>
+
+        <div class="flex-row">
+            <figure style="width: 50%;">
+                <a href="assets/video/tesla_normal_detect.webp">
+                    <img width="98%" src="assets/video/tesla_normal_detect.webp">
+                </a>
+            </figure>
+            <figure style="width: 50%;">
+                <a href="assets/video/tesla_attack_detect.webp">
+                    <img width="98%" src="assets/video/tesla_attack_detect.webp">
+                </a>
+            </figure>
+        </div>
+
+        <!-- <figure style="width: 100%;">
+            <a href="assets/DTA_real_wrold_evaluation_banner.png">
+                <img width="100%" src="assets/DTA_real_wrold_evaluation_banner.png">
+            </a>
+        </figure> -->
+
         </section>
 
         <hr>
 
-        <section id="teaser-videos">
+        <section id="results">
+
+            <h2>Photo Realistic-Rendering Engine</h2>
+            <hr>
+            <div class="flex-row">
+                <figure style="width: 70%;">
+                    <video class="centered" width="90%" controls muted loop autoplay>
+                        <source src="assets/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                <div style="width: 30%;">
+                    <p>Photo-realistic rendering engine is any software that can produce a photo-realistic image which
+                        is similar to the real physical world. In our work, we use <a
+                            href="https://carla.org/2020/12/22/release-0.9.11/">
+                            Carla Simulator (ver. 0.9.11)</a> on <a href="https://www.unrealengine.com/en-US/">Unreal
+                            Engine (ver. 2.4)</a> to
+                        synthesize our dataset as well as to evaluate our generated texture on photo-realsitic
+                        simulation setting. We modify original code to allow car's texture modification.
+                        The video illustrating how the output of the rendering engine we use.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Differentiable Transformation Network (DTN)</h2>
+            <hr>
+            <figure style="width: 100%;">
+                <a href="assets/dtn_architecture.png">
+                    <img width="100%" src="assets/dtn_architecture.png">
+                </a>
+                <p class="caption" style="margin-bottom: 1px;">
+                    Our proposed DTN learns the expected transformation of a rendered object when the texture is changed
+                    while preserving the original properties of the target object. It relies on the photo-realistic
+                    image synthesized from a non-differentiable renderer to produce a differentiable version of the
+                    reference image after applying the expected texture. DTN is embedded as an extention to provide
+                    texture differentiablity.
+                </p>
+            </figure>
+
+            <div class="flex-row">
+                <div style="width: 30%;">
+                    <br>
+                    <br>
+                    <p>The video ilustrate how our DTN can correctly predict the rendered image when the texture (color)
+                        is changed. The network retains the original target properties such as material, light
+                        reflection, and shadow from other object.
+                    </p>
+                </div>
+                <figure style="width: 70%;">
+                    <video class="centered" width="90%" controls muted loop autoplay>
+                        <source src="assets/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <h2>Repeated Texture Projection Function</h2>
+            <hr>
+
+        </section>
+
+
+        <!-- <section id="teaser-videos">
             <div class="flex-row">
                 <figure style="width: 70%;">
                     <video class="centered" width="90%" controls muted loop autoplay>
@@ -142,8 +226,8 @@
                     </p>
                 </div>
             </div>
-        </section>
-
+        </section> -->
+        <!-- 
         <section id="results">
 
             <h2>3D model reconstruction and intrinsic decomposition from images</h2>
@@ -229,7 +313,7 @@
                     <div><span class="material-icons"> insert_comment </span><a href="assets/bib.txt"> BibTeX</a></div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </div>
 </body>
