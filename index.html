@@ -90,9 +90,9 @@
                     physical adversarial pattern on a target object to camouflage it against object detection models
                     under a wide range of transformations.
                     Our framework uses legacy photo-realistic renderers for simulating physical-world transformations
-                    and employs our novel <b>Differentiable Transformation Network (DTN)</b> to enable the texture
-                    differentiability. Our framework produces a robust adversarial pattern that is applicable and
-                    transferable even in the real-world.
+                    and employs our novel <b>Differentiable Transformation Network (DTN)</b> to enable texture
+                    differentiability. Our framework produces a robust adversarial texture as a repeated pattern
+                    applicable and transferable even in the real world.
                     <!-- DTN is trained to learn the expected transformation of a rendered object when the texture is
                     changed while retaining the target object's original properties. -->
                 </p>
@@ -146,19 +146,28 @@
         <hr>
 
         <section id="results">
+            <h2>DTA framework</h2>
+            <hr>
+            <p>
+                As shown in the top picture, <b>DTA Framework</b> consists of four components: <b>Photo-Realistic
+                    Rendering Engine</b>, <b>Repeated Texture Projection Function</b>, <b>Differentiable Transformation
+                    Network (DTN)</b>, and the target <b>Object Detection Model</b>.
+                <!-- DTA Framework is a practical approach that utilizes gradient-based optimization to find a robust physical
+                adversarial pattern on legacy photo-realistic rendering, which is not always differentiable. -->
+            </p>
 
-            <h2>Photo Realistic-Rendering Engine</h2>
+            <h3>Photo-Realistic Rendering Engine</h3>
             <hr>
             <div class="flex-row">
                 <figure style="width: 70%;">
                     <video class="centered" width="90%" controls muted loop autoplay>
-                        <source src="assets/video.mp4" type="video/mp4">
+                        <source src="assets/video/Photo-Realistic Rendering Demo.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                 </figure>
                 <div style="width: 30%;">
-                    <p>Photo-realistic rendering engine is any software that can produce a photo-realistic image which
-                        is similar to the real physical world. In our work, we use <a
+                    <p> <b>Photo-realistic rendering engine</b> is any software that can produce a photo-realistic image
+                        which is similar to the <b>real physical world</b>. In our work, we use <a
                             href="https://carla.org/2020/12/22/release-0.9.11/">
                             Carla Simulator (ver. 0.9.11)</a> on <a href="https://www.unrealengine.com/en-US/">Unreal
                             Engine (ver. 2.4)</a> to
@@ -169,23 +178,24 @@
                 </div>
             </div>
 
-            <h2>Differentiable Transformation Network (DTN)</h2>
+            <h3>Differentiable Transformation Network (DTN)</h3>
             <hr>
             <figure style="width: 100%;">
                 <a href="assets/dtn_architecture.png">
                     <img width="100%" src="assets/dtn_architecture.png">
                 </a>
                 <p class="caption" style="margin-bottom: 1px;">
-                    Our proposed DTN learns the expected transformation of a rendered object when the texture is changed
-                    while preserving the original properties of the target object. It relies on the photo-realistic
-                    image synthesized from a non-differentiable renderer to produce a differentiable version of the
-                    reference image after applying the expected texture. DTN is embedded as an extention to provide
-                    texture differentiablity.
+                    Our proposed <b>DTN learns the expected transformation of a rendered object when the texture is
+                        changed</b> while preserving the original properties of the target object. It relies on the
+                    photo-realistic image synthesized from a non-differentiable renderer to produce a differentiable
+                    version of the reference image after applying the expected texture. DTN is embedded as an extention
+                    to provide texture differentiablity.
                 </p>
             </figure>
 
             <div class="flex-row">
                 <div style="width: 30%;">
+                    <br>
                     <br>
                     <br>
                     <p>The video ilustrate how our DTN can correctly predict the rendered image when the texture (color)
@@ -195,16 +205,181 @@
                 </div>
                 <figure style="width: 70%;">
                     <video class="centered" width="90%" controls muted loop autoplay>
-                        <source src="assets/video.mp4" type="video/mp4">
+                        <source src="assets/video/DTN Color Rendering Demo.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
                 </figure>
             </div>
 
-            <h2>Repeated Texture Projection Function</h2>
+            <h3>Repeated Texture Projection Function</h3>
+            <hr>
+            <figure style="width: 100%;">
+                <a href="assets/repeated_texture_projection_function.png">
+                    <img width="75%" class="center" src="assets/repeated_texture_projection_function.png">
+                </a>
+                <p class="caption" style="margin-bottom: 1px;">
+                    We propose a <b>repeated pattern</b> as our final attack camouflage texture. It has several
+                    benefits, such as ease of application because the texture can be used to cover the object while
+                    ignoring the texture mapping. As the application, we propose a <b>Repeated Texture Projection
+                        Function</b> for simply projecting the pattern with a sequence of operations by
+                    <b>transformation matrix <i>M</i></b>. We use wrap mode for filling points outside boundaries, which
+                    extends the output by wrapping around the opposite edge, giving a repeated texture effect.
+                </p>
+            </figure>
+
+            <div class="flex-row">
+                <div style="width: 30%;">
+                    <br>
+                    <br>
+                    <p>The video illustrates how our DTN + Repeated Texture Projection Function can be used to mimic the
+                        repeated pattern produced by the photo-realistic rendering engine. This gives us the
+                        differentiable version of the photo-realistic renderer, allowing us to use gradient-based
+                        optimization to find the optimum repeated attack texture.
+                    </p>
+                </div>
+                <figure style="width: 70%;">
+                    <video class="centered" width="90%" controls muted loop autoplay>
+                        <source src="assets/video/DTN + Repeated Texture Projection Demo.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+
+            <h2>Framework Procedure</h2>
+            <hr>
+
+            <h3>DTN Model Training</h3>
+            <hr>
+
+            <div class="flex-row">
+                <div style="width: 30%;">
+                    <br>
+                    <p>
+                        Before using DTA to generate the adversarial pattern, We need to train DTN with the dataset
+                        generated by the photo-realistic rendering engine (see the first video on how the dataset is
+                        generated). First, we select a set of random flat color textures and predefined transformations.
+                        Then, we use the rendering engine to produce the photo-realistic images that will later be used
+                        as reference image <i>x<sub>ref</sub></i> , expected texture <i>η<sub>exp</sub></i> , and
+                        ground truth of rendered image <i>x<sub>ren</sub></i> . See the figure on the right for DTN
+                        training
+                        diagram.
+                    </p>
+                </div>
+                <figure style="width: 70%;">
+                    <a href="assets/dtn_training_process.png">
+                        <img width="90%" class="center" src="assets/dtn_training_process.png">
+                    </a>
+                </figure>
+            </div>
+
+            <figure style="width: 100%;">
+                <p>
+                    The training histories of DTN with DenseNet
+                    architecture and the prediction samples are shown below.
+                </p>
+
+                <a href="assets/dtn_densenet_4_2_histories.png">
+                    <img width="100%" class="center" src="assets/dtn_densenet_4_2_histories.png">
+                </a>
+                <a href="assets/dtn_prediction_demo.png">
+                    <img width="100%" class="center" src="assets/dtn_prediction_demo.png">
+                </a>
+            </figure>
+
+            <h3>DTA Attacking Phase</h3>
+            <hr>
+
+            <div class="flex-row">
+                <div style="width: 50%;">
+                    <br>
+                    <p>
+                        In the attack phase, the goal is to minimize the original target confidence score, which
+                        prevents the object detector from detecting the target object correctly. We use the
+                        differentiability of the complete DTA Framework to find the best adversarial pattern
+                        <i>η<sub>adv</sub></i> that minimizes the attack loss <i>L<sub>atk</sub></i> by updating the
+                        <i>η<sub>adv</sub></i> based on the loss gradient. The right figure shows the training history
+                        for DTA targeting EfficientDetD0 model of Toyota Camry car.
+                    </p>
+                </div>
+                <figure style="width: 50%;">
+                    <a href="assets/camry_effdetd0_attack_histories.png">
+                        <img width="100%" class="center" src="assets/camry_effdetd0_attack_histories.png">
+                    </a>
+                </figure>
+            </div>
+
+            <figure style="width: 100%;">
+                <p>
+                    The sample prediction of the DTA Framework consisting of standard, random (initial), and attack
+                    (final) textured cars are shown below. As we can random textured car is not sufficient to camouflage
+                    the car from the object detection model.
+                </p>
+
+                <a href="assets/dta_prediction_demo.png">
+                    <img width="100%" class="center" src="assets/dta_prediction_demo.png">
+                </a>
+            </figure>
+
+            <!-- <figure style="width: 100%;">
+                <p class="caption" style="margin-bottom: 1px;">
+                    In the attack phase, the goal is to minimize the original target confidence score, which
+                    prevents the object detector from detecting the target object correctly. We can use the
+                    differentiability of the complete DTA Framework to find the best adversarial pattern
+                    <i>η<sub>adv</sub></i> that minimizes the attack loss <i>L<sub>atk</sub></i> by updating the
+                    <i>η<sub>adv</sub></i> based on the loss gradient.
+                </p>
+            </figure> -->
+
+            <h2>Evaluation Results</h2>
+            <hr>
+
+            <h3>Photo-Realistic Simulation Evaluation</h3>
+            <hr>
+
+            <h3>Transferability Evaluation</h3>
+            <hr>
+
+            <h3>Real-World Evaluation</h3>
             <hr>
 
         </section>
+
+        <section id="bibtex">
+            <h2>Citation</h2>
+            <hr>
+            <pre><code>
+                @article{...,
+                    author = {...},
+                    title = "{...}",
+                    journal = {...},
+                    year = {...}
+                }
+            </code></pre>
+        </section>
+
+        <br />
+        <section id="paper">
+            <h2>Paper</h2>
+            <hr>
+            <div class="flex-row">
+                <div style="box-sizing: border-box; padding: 16px; margin: auto;">
+                    <a href="#"><img class="screenshot" src="assets/paper_preview.JPG"></a>
+                </div>
+                <div style="width: 50%">
+                    <p><b>DTA: Physical Camouflage Attacks using Differentiable Transformation Network</b></p>
+                    <p>
+                        Naufal Suryanto, Yongsu Kim, Hyoeun Kang, Harashta Tatimma Larasati,
+                        Youngyeo Yun, Thi-Thu-Huong Le, Hunmin Yang, Se-Yoon Oh, Howon Kim
+                    </p>
+                    <div><span class="material-icons"> description </span><a href="#"> Paper</a>
+                    </div>
+                    <div><span class="material-icons"> description </span><a href="#">
+                            Supplementary</a></div>
+                    <div><span class="material-icons"> description </span><a href="#"> arXiv</a></div>
+                    <div><span class="material-icons"> insert_comment </span><a href="#"> BibTeX</a></div>
+                </div>
+            </div>
+        </section> -->
 
 
         <!-- <section id="teaser-videos">
