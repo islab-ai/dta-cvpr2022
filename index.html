@@ -47,14 +47,23 @@
             <div class="author-row">
                 <div class="col-3 text-center"><a href="https://www.linkedin.com/in/naufal-suryanto/">Naufal
                         Suryanto</a><sup>1</sup></div>
-                <div class="col-3 text-center"><a href="#">Yongsu Kim</a><sup>1,2</sup></div>
-                <div class="col-3 text-center"><a href="#">Hyoeun Kang</a><sup>1</sup></div>
-                <div class="col-3 text-center"><a href="#">Harashta Tatimma Larasati</a><sup>1</sup></div>
-                <div class="col-3 text-center"><a href="#">Youngyeo Yun</a><sup>1</sup></div>
-                <div class="col-3 text-center"><a href="#">Thi-Thu-Huong Le</a><sup>1</sup></div>
-                <div class="col-3 text-center"><a href="#">Hunmin Yang</a><sup>3</sup></div>
-                <div class="col-3 text-center"><a href="#">Se-Yoon Oh</a><sup>3</sup></div>
-                <div class="col-3 text-center"><a href="#">Howon Kim</a><sup>1,2</sup></div>
+                <div class="col-3 text-center"><a href="https://scholar.google.co.kr/citations?user=DXb797cAAAAJ">Yongsu
+                        Kim</a><sup>1,2</sup></div>
+                <div class="col-3 text-center"><a href="https://scholar.google.co.kr/citations?user=GeQi_D4AAAAJ">
+                        Hyoeun Kang</a><sup>1</sup></div>
+                <div class="col-3 text-center"><a href="https://scholar.google.co.id/citations?user=S8lwCEUAAAAJ">
+                        Harashta Tatimma Larasati</a><sup>1</sup></div>
+                <div class="col-3 text-center"><a href="https://scholar.google.com/citations?user=dFZRNOEAAAAJ">
+                        Youngyeo Yun</a><sup>1</sup>
+                </div>
+                <div class="col-3 text-center"><a href="https://scholar.google.com/citations?user=UptzPYsAAAAJ">
+                        Thi-Thu-Huong Le</a><sup>1</sup></div>
+                <div class="col-3 text-center"><a href="https://scholar.google.co.kr/citations?user=mDxJj2AAAAAJ">Hunmin
+                        Yang</a><sup>3</sup></div>
+                <div class="col-3 text-center"><a href="https://ieeexplore.ieee.org/author/37088566336">Se-Yoon
+                        Oh</a><sup>3</sup></div>
+                <div class="col-3 text-center"><a href="https://ieeexplore.ieee.org/author/37082911200">Howon
+                        Kim</a><sup>1,2</sup></div>
             </div>
 
             <div class="affil-row">
@@ -332,15 +341,234 @@
 
             <h2>Evaluation Results</h2>
             <hr>
+            <p>
+                We compare our adversarial camouflage with a random pattern and previous works on 3D physical attacks:
+                <a href="https://openreview.net/forum?id=SJgEl3A5tm">CAMOU</a>,
+                <a href="https://arxiv.org/abs/2007.16118">ER</a>,
+                <a
+                    href="https://openaccess.thecvf.com/content_CVPR_2020/html/Huang_Universal_Physical_Camouflage_Attacks_on_Object_Detectors_CVPR_2020_paper.html">UPC</a>,
+                and
+                <a
+                    href="https://openaccess.thecvf.com/content/CVPR2021/html/Wang_Dual_Attention_Suppression_Attack_Generate_Adversarial_Camouflage_in_Physical_World_CVPR_2021_paper.html">DAS</a>
+                We closely follow the approach to replicate the original papers, but we rebuild the environment and
+                target models based on our evaluation setup (see supplementary material for the details). However,
+                <a
+                    href="https://openaccess.thecvf.com/content_CVPR_2020/html/Huang_Universal_Physical_Camouflage_Attacks_on_Object_Detectors_CVPR_2020_paper.html">UPC</a>
+                and
+                <a
+                    href="https://openaccess.thecvf.com/content/CVPR2021/html/Wang_Dual_Attention_Suppression_Attack_Generate_Adversarial_Camouflage_in_Physical_World_CVPR_2021_paper.html">DAS</a>
+                have different settings to recreate in our environment; thus, we only evaluate them on the
+                transferability experiment.
+            </p>
 
             <h3>Photo-Realistic Simulation Evaluation</h3>
             <hr>
+            <h4>Target: EfficientDetD0 | Camera: 5m Distance, 15° Pitch, 360° Rotation</h4>
+            <div class="flex-row-center">
+                <button onclick="simulation_video('play', 'effdetd0_5d_15p')">Play/Stop</button>
+                <div style="width: 10px;"></div>
+                <button onclick="simulation_video('restart', 'effdetd0_5d_15p')">Restart</button>
+            </div>
+            <div class="flex-row">
+                <figure style="width: 50%;">
+                    <video id="effdetd0_5d_15p_normal" class="centered" width="95%" controls muted loop>
+                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_Normal.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                <figure style="width: 50%;">
+                    <video id="effdetd0_5d_15p_random" class="centered" width="95%" controls muted loop>
+                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_random.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <figure style="width: 50%;">
+                    <video id="effdetd0_5d_15p_camou" class="centered" width="95%" controls muted loop>
+                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_CAMOU.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                <figure style="width: 50%;">
+                    <video id="effdetd0_5d_15p_er" class="centered" width="95%" controls muted loop>
+                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_ER.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <figure style="width: 100%;">
+                    <video id="effdetd0_5d_15p_dta" class="centered" width="50%" controls muted loop>
+                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_DTA.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>Normal Detection Rate: 100%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_5d_15p/normal_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/normal_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>Random Detection Rate: 87%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_5d_15p/random_texture_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/random_texture_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>CAMOU Detection Rate: 79%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_5d_15p/camou_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/camou_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>ER <br>Detection Rate: 68%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_5d_15p/er_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/er_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>DTA Detection Rate: 20%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_5d_15p/dta_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/dta_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+
+            <hr>
+
+            More Available Soon...
+
+            <!-- <h4>Target: EfficientDetD0 | Camera: 10m Distance, 15° Pitch, 360° Rotation</h4>
+            <div class="flex-row">
+                <figure style="width: 50%;">
+                    <video class="centered" width="95%" controls muted loop autoplay>
+                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_Normal.webm"
+                            type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                <figure style="width: 50%;">
+                    <video class="centered" width="95%" controls muted loop autoplay>
+                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_Random.webm"
+                            type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <figure style="width: 50%;">
+                    <video class="centered" width="95%" controls muted loop autoplay>
+                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_CAMOU.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                <figure style="width: 50%;">
+                    <video class="centered" width="95%" controls muted loop autoplay>
+                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_ER.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <figure style="width: 100%;">
+                    <video class="centered" width="50%" controls muted loop autoplay>
+                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_DTA.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>Normal Detection Rate: 100%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_10d_15p/normal_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/normal_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>Random Detection Rate: 97%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_10d_15p/Random_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/Random_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>CAMOU Detection Rate: 94%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_10d_15p/CAMOU_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/CAMOU_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>ER <br>Detection Rate: 84%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_10d_15p/ER_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/ER_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+            <div class="flex-row">
+                <div style="width: 10%;">
+                    <br>
+                    <p>DTA Detection Rate: 47%</p>
+                </div>
+                <figure style="width: 90%;">
+                    <a href="assets/evaluation/sim_10d_15p/DTA_plot.jpg">
+                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/DTA_plot.jpg">
+                    </a>
+                </figure>
+            </div>
+
+            <hr> -->
 
             <h3>Transferability Evaluation</h3>
             <hr>
+            Available soon....
 
             <h3>Real-World Evaluation</h3>
             <hr>
+            Available soon....
 
         </section>
 
@@ -348,6 +576,7 @@
             <h2>Citation</h2>
             <hr>
             <pre><code>
+                Available soon....
                 @article{...,
                     author = {...},
                     title = "{...}",
@@ -363,7 +592,7 @@
             <hr>
             <div class="flex-row">
                 <div style="box-sizing: border-box; padding: 16px; margin: auto;">
-                    <a href="#"><img class="screenshot" src="assets/paper_preview.JPG"></a>
+                    <a href="assets/paper_preview.png"><img class="screenshot" src="assets/paper_preview.png"></a>
                 </div>
                 <div style="width: 50%">
                     <p><b>DTA: Physical Camouflage Attacks using Differentiable Transformation Network</b></p>
@@ -491,6 +720,8 @@
         </section> -->
 
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

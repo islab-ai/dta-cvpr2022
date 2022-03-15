@@ -28,7 +28,8 @@
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
       text-align: center;
   }
 
@@ -178,6 +179,15 @@
       list-style: none;
   }
 
+  .flex-row-center {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
+
   .paper-btn {
       position: relative;
       text-align: center;
@@ -260,3 +270,4 @@
       margin-left: auto;
       margin-right: auto;
   }
+
