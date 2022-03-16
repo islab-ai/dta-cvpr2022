@@ -6,10 +6,11 @@
     google.load("jquery", "1.3.2");
 </script>
 
-<style type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
-</style>
-
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 <div class="topnav" id="myTopnav">
     <a href="http://infosec.pusan.ac.kr/"><img width="100%" src="assets/infosec_logo.png"></a>
@@ -17,8 +18,6 @@
     <a href="https://add.re.kr/"><img width="100%" src="assets/add_logo.png"></a>
 </div>
 
-<!-- End : Google Analytics Code -->
-<script type="text/javascript" src="../js/hidebib.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic'
     rel='stylesheet' type='text/css'>
 
@@ -28,20 +27,22 @@
         content="DTA: Physical Camouflage Attacks using Differentiable Transformation Network" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
-    <head>
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 
 <body>
     <div class="container">
+        
+        <div id="avs" class="modal">
+            <p>Available soon...</p>
+        </div>
+
         <div class="paper-title">
             <h1>DTA: Physical Camouflage Attacks using Differentiable Transformation Network</h1>
             <h2>CVPR 2022 - Accepted Paper</h2>
         </div>
-
 
         <div id="authors">
             <div class="author-row">
@@ -77,11 +78,11 @@
 
             <div style="clear: both">
                 <div class="paper-btn-parent">
-                    <a class="supp-btn" href="#">
+                    <a class="supp-btn" href="#avs" rel="modal:open">
                         <span class="material-icons"> description </span>
                         Paper
                     </a>
-                    <a class="supp-btn" href="#">
+                    <a class="supp-btn" href="#avs" rel="modal:open">
                         <span class="material-icons"> description </span>
                         BibTeX
                     </a>
@@ -363,212 +364,41 @@
 
             <h3>Photo-Realistic Simulation Evaluation</h3>
             <hr>
-            <h4>Target: EfficientDetD0 | Camera: 5m Distance, 15° Pitch, 360° Rotation</h4>
-            <div class="flex-row-center">
-                <button onclick="simulation_video('play', 'effdetd0_5d_15p')">Play/Stop</button>
-                <div style="width: 10px;"></div>
-                <button onclick="simulation_video('restart', 'effdetd0_5d_15p')">Restart</button>
-            </div>
-            <div class="flex-row">
-                <figure style="width: 50%;">
-                    <video id="effdetd0_5d_15p_normal" class="centered" width="95%" controls muted loop>
-                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_Normal.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-                <figure style="width: 50%;">
-                    <video id="effdetd0_5d_15p_random" class="centered" width="95%" controls muted loop>
-                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_random.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <figure style="width: 50%;">
-                    <video id="effdetd0_5d_15p_camou" class="centered" width="95%" controls muted loop>
-                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_CAMOU.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-                <figure style="width: 50%;">
-                    <video id="effdetd0_5d_15p_er" class="centered" width="95%" controls muted loop>
-                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_ER.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <figure style="width: 100%;">
-                    <video id="effdetd0_5d_15p_dta" class="centered" width="50%" controls muted loop>
-                        <source src="assets/evaluation/sim_5d_15p/Camry_EffDetD0_5d_15p_DTA.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>Normal Detection Rate: 100%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_5d_15p/normal_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/normal_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>Random Detection Rate: 87%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_5d_15p/random_texture_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/random_texture_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>CAMOU Detection Rate: 79%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_5d_15p/camou_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/camou_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>ER <br>Detection Rate: 68%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_5d_15p/er_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/er_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>DTA Detection Rate: 20%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_5d_15p/dta_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_5d_15p/dta_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-
-            <hr>
-
-            More Available Soon...
-
-            <!-- <h4>Target: EfficientDetD0 | Camera: 10m Distance, 15° Pitch, 360° Rotation</h4>
-            <div class="flex-row">
-                <figure style="width: 50%;">
-                    <video class="centered" width="95%" controls muted loop autoplay>
-                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_Normal.webm"
-                            type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-                <figure style="width: 50%;">
-                    <video class="centered" width="95%" controls muted loop autoplay>
-                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_Random.webm"
-                            type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <figure style="width: 50%;">
-                    <video class="centered" width="95%" controls muted loop autoplay>
-                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_CAMOU.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-                <figure style="width: 50%;">
-                    <video class="centered" width="95%" controls muted loop autoplay>
-                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_ER.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <figure style="width: 100%;">
-                    <video class="centered" width="50%" controls muted loop autoplay>
-                        <source src="assets/evaluation/sim_10d_15p/Camry_EffDetD0_10d_15p_DTA.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>Normal Detection Rate: 100%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_10d_15p/normal_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/normal_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>Random Detection Rate: 97%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_10d_15p/Random_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/Random_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>CAMOU Detection Rate: 94%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_10d_15p/CAMOU_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/CAMOU_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>ER <br>Detection Rate: 84%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_10d_15p/ER_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/ER_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-            <div class="flex-row">
-                <div style="width: 10%;">
-                    <br>
-                    <p>DTA Detection Rate: 47%</p>
-                </div>
-                <figure style="width: 90%;">
-                    <a href="assets/evaluation/sim_10d_15p/DTA_plot.jpg">
-                        <img width="100%" class="center" src="assets/evaluation/sim_10d_15p/DTA_plot.jpg">
-                    </a>
-                </figure>
-            </div>
-
-            <hr> -->
+            <p style="text-align: center;">[Click the link to show sample demo videos]</p>
+            <h4><a href="evaluation/effdetd0_5d_15p.html">Target: EfficientDetD0 | Camera: 5m Distance, 15° Pitch, 360°
+                    Rotation</a></h4>
+            <h4><a href="#avs" rel="modal:open">Target: EfficientDetD0 | Camera: 10m Distance, 15° Pitch, 360°
+                    Rotation</a></h4>
+            <h4><a href="#avs" rel="modal:open">Target: EfficientDetD0 | Camera: 5m Distance, 30°
+                    Pitch, 360°
+                    Rotation</a></h4>
+            <h4><a href="#avs" rel="modal:open">Target: EfficientDetD0 | Camera: 10m Distance, 30°
+                    Pitch, 360°
+                    Rotation</a></h4>
 
             <h3>Transferability Evaluation</h3>
             <hr>
-            Available soon....
+            <p style="text-align: center;">[Click the link to show sample demo videos]</p>
+            <h4><a href="#avs" rel="modal:open">Target: SSD | Camera: 5m Distance, 15° Pitch, 360°
+                    Rotation</a></h4>
+            <h4><a href="#avs" rel="modal:open">Target: Faster-RCNN | Camera: 7.5m Distance, 15° Pitch,
+                    360°
+                    Rotation</a></h4>
+            <h4><a href="#avs" rel="modal:open">Target: Mask-RCNN | Camera: 10m Distance, 30° Pitch,
+                    360°
+                    Rotation</a></h4>
 
             <h3>Real-World Evaluation</h3>
             <hr>
-            Available soon....
+            <figure style="width: 100%;">
+                <a href="assets/RealWorld4x4.png">
+                    <img width="100%" src="assets/RealWorld4x4.png">
+                </a>
+                <p style="margin-bottom: 1px;">
+                    
+                </p>
+            </figure>
+            Videos are available soon....
 
         </section>
 
@@ -600,15 +430,16 @@
                         Naufal Suryanto, Yongsu Kim, Hyoeun Kang, Harashta Tatimma Larasati,
                         Youngyeo Yun, Thi-Thu-Huong Le, Hunmin Yang, Se-Yoon Oh, Howon Kim
                     </p>
-                    <div><span class="material-icons"> description </span><a href="#"> Paper</a>
+                    <div><span class="material-icons"> description </span><a href="#avs" rel="modal:open"> Paper</a>
                     </div>
-                    <div><span class="material-icons"> description </span><a href="#">
+                    <div><span class="material-icons"> description </span><a href="#avs" rel="modal:open">
                             Supplementary</a></div>
-                    <div><span class="material-icons"> description </span><a href="#"> arXiv</a></div>
-                    <div><span class="material-icons"> insert_comment </span><a href="#"> BibTeX</a></div>
+                    <div><span class="material-icons"> description </span><a href="#avs" rel="modal:open"> arXiv</a></div>
+                    <div><span class="material-icons"> insert_comment </span><a href="#avs" rel="modal:open"> BibTeX</a>
+                    </div>
                 </div>
             </div>
-        </section> -->
+        </section>
 
 
         <!-- <section id="teaser-videos">
