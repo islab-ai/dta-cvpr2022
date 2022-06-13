@@ -1,8 +1,8 @@
-@article{suryanto2022dta,
-      title={DTA: Physical Camouflage Attacks using Differentiable Transformation Network}, 
-      author={Naufal Suryanto and Yongsu Kim and Hyoeun Kang and Harashta Tatimma Larasati and Youngyeo Yun and Thi-Thu-Huong Le and Hunmin Yang and Se-Yoon Oh and Howon Kim},
-      year={2022},
-      eprint={2203.09831},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Suryanto_2022_CVPR,
+    author    = {Suryanto, Naufal and Kim, Yongsu and Kang, Hyoeun and Larasati, Harashta Tatimma and Yun, Youngyeo and Le, Thi-Thu-Huong and Yang, Hunmin and Oh, Se-Yoon and Kim, Howon},
+    title     = {DTA: Physical Camouflage Attacks Using Differentiable Transformation Network},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {15305-15314}
 }
