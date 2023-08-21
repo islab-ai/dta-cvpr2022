@@ -296,3 +296,20 @@
   a.btn:hover {
       background-color: #DDDDDD;
   }
+
+  .announcement {
+      text-align: center;
+  }
+
+  .announcement p {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+  }
+
+  @keyframes blinker {
+      50% {
+          opacity: 0;
+      }
+  }
